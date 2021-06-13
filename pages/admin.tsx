@@ -4,7 +4,15 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <main>
-        <h1 className={styles.title}>Administración</h1>
+        <header>
+          <h1 className={styles.title}>Administración</h1>
+        </header>
+        <section>
+          <h2>Grupos</h2>
+        </section>
+        <section>
+          <h2>Áreas</h2>
+        </section>
       </main>
     </div>
   )
