@@ -1,6 +1,6 @@
 import styles from "../styles/Basic.module.css"
 
-export default function Home() {
+export default function Admin() {
   return (
     <div className={styles.container}>
       <main>
