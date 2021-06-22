@@ -10,9 +10,6 @@ export default function Admin() {
         <section>
           <h2>Grupos</h2>
         </section>
-        <section>
-          <h2>Áreas</h2>
-        </section>
       </main>
     </div>
   )
