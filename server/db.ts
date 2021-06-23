@@ -39,9 +39,7 @@ export async function connectToDb(client: MongoClient) {
 
   await client.connect()
 
-  return {
-    db: client.db(DB_NAME),
-  }
+  return client.db(DB_NAME)
 }
 
 function getDbName(): string {
