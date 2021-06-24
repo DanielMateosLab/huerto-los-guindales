@@ -7,7 +7,6 @@ import styles from "../styles/Basic.module.css"
 export default function Admin(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
-  console.log(props)
   return (
     <div className={styles.container}>
       <main>
