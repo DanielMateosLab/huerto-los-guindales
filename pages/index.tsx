@@ -11,7 +11,7 @@ interface UpdateGroupsAction {
   payload: Group[]
 }
 
-export default function Admin(
+export default function Index(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
   if (props.state == undefined) {
@@ -41,7 +41,7 @@ export default function Admin(
     <div className={styles.container}>
       <main>
         <header>
-          <h1 className={styles.title}>Administración</h1>
+          <h1 className={styles.title}>Huerto Los Guindales</h1>
         </header>
         <section>
           <header className="groupsHeader">
