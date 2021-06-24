@@ -1,3 +1,4 @@
+import GroupSearchBar from "features/areasOverview/GroupSearchBar"
 import { GetServerSideProps, InferGetServerSidePropsType } from "next"
 import { connectToDb, getClient } from "server/db"
 import { GroupsDAO } from "server/GroupsDAO"
@@ -14,13 +15,26 @@ export default function Admin(
           <h1 className={styles.title}>Administración</h1>
         </header>
         <section>
-          <h2>Grupos</h2>
+          <header className="groupsHeader">
+            <h2>Grupos</h2>
+            <GroupSearchBar />
+          </header>
           {props.groups &&
             props.groups.map((group: Group) => (
               <div key={group._id}>{group.name}</div>
             ))}
         </section>
       </main>
+
+      <style jsx>
+        {`
+          .groupsHeader {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
+        `}
+      </style>
     </div>
   )
 }
