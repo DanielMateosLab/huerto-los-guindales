@@ -45,7 +45,7 @@ export default function Admin(
         </header>
         <section>
           <header className="groupsHeader">
-            <h2>Grupos</h2>
+            <h2>Grupos {`(${state.groupsCount})`}</h2>
             <GroupSearchBar />
           </header>
           {state.groups &&
