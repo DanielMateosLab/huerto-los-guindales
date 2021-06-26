@@ -1,5 +1,5 @@
+import { MissingEnvVarError } from "@danielmat/api-utils"
 import { MongoClient } from "mongodb"
-import { MissingEnvVarError } from "utils/errors"
 
 /**
  *  In order to connect to the db we have to:
