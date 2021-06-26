@@ -6,7 +6,6 @@ export interface Group {
 }
 
 export interface OverviewState {
-  // nameFilter
   groupsCount: number
   groups: Group[]
 }

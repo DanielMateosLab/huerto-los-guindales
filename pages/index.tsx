@@ -1,41 +1,12 @@
 import GroupSearchBar from "features/areasOverview/GroupSearchBar"
-import { GetServerSideProps, InferGetServerSidePropsType } from "next"
-import { Reducer, useReducer } from "react"
-import { connectToDb, getClient } from "server/db"
-import { GroupsDAO } from "server/GroupsDAO"
-import { Group, OverviewState } from "utils/types"
+import { Group } from "utils/types"
+import useFetchGroups from "utils/useFetchGroups"
 import styles from "../styles/Basic.module.css"
 
-interface UpdateGroupsAction {
-  type: "updateGroups"
-  payload: Group[]
-}
-
-export default function Index(
-  props: InferGetServerSidePropsType<typeof getServerSideProps>
-) {
-  if (props.state == undefined) {
-    return (
-      <div className={styles.container}>
-        <p>
-          Ha ocurrido un error conectando con la base de datos.
-          {props.error?.message}
-        </p>
-      </div>
-    )
-  }
-
-  const [state, dispatch] = useReducer<
-    Reducer<OverviewState, UpdateGroupsAction>
-  >((state, action) => {
-    switch (action.type) {
-      case "updateGroups":
-        return {
-          ...state,
-          groups: action.payload,
-        }
-    }
-  }, props.state)
+export default function Index() {
+  // TODO: Db client doesn't have to be closed manually, so refactor db connection functions to be simpler.
+  // Add error and loading messages. Then add pagination and filter
+  const { groups, groupsCount } = useFetchGroups()
 
   return (
     <div className={styles.container}>
@@ -45,11 +16,11 @@ export default function Index(
         </header>
         <section>
           <header className="groupsHeader">
-            <h2>Grupos {`(${state.groupsCount})`}</h2>
+            <h2>Grupos {`(${groupsCount})`}</h2>
             <GroupSearchBar />
           </header>
-          {state.groups &&
-            state.groups.map((group: Group) => (
+          {groups &&
+            groups.map((group: Group) => (
               <div key={group._id}>{group.name}</div>
             ))}
         </section>
@@ -66,26 +37,4 @@ export default function Index(
       </style>
     </div>
   )
-}
-
-export const getServerSideProps: GetServerSideProps<{
-  state?: OverviewState
-  error?: Error
-}> = async () => {
-  const client = getClient()
-  try {
-    const db = await connectToDb(client)
-    const groupsDAO = new GroupsDAO(db)
-
-    const groups = await groupsDAO.getGroups()
-    return {
-      props: { state: groups },
-    }
-  } catch (error) {
-    return {
-      props: { error },
-    }
-  } finally {
-    await client.close()
-  }
 }

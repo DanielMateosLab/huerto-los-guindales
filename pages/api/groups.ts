@@ -9,18 +9,14 @@ const handler: NextApiHandler<GroupsResponse> = async (req, res) => {
   if (req.method === "GET") {
     const client = getClient()
 
-    try {
-      const db = await connectToDb(client)
-      const groupsDAO = new GroupsDAO(db)
+    const db = await connectToDb(client)
+    const groupsDAO = new GroupsDAO(db)
 
-      const result = await groupsDAO.getGroups()
-      res.status(200).json({
-        status: "success",
-        payload: result,
-      })
-    } finally {
-      client.close()
-    }
+    const result = await groupsDAO.getGroups()
+    res.status(200).json({
+      status: "success",
+      payload: result,
+    })
   } else {
     throw new MethodNotAllowedError()
   }
