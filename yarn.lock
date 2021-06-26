@@ -46,10 +46,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@danielmat/api-utils@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@danielmat/api-utils/-/api-utils-1.0.0.tgz#eddaee494f7965a44836420a97a72a82cce2d4a3"
-  integrity sha512-R+8tu0e74O+rwoKTrHuf1zHejaG98KFZHK0ADOIm8fy1MzBIyPJGLCsN2FkeNNAsHOgqWFr6wPg50CyvP5AgKg==
+"@danielmat/api-utils@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@danielmat/api-utils/-/api-utils-1.0.1.tgz#4b9bfd84173b98f7160382153e259b2caaa8f726"
+  integrity sha512-+/MLwXWWnGE0zDCLcdt3njMPTAWv5QuBjnkEa4b9iuK8KdL5GqL3W35GMzWCfi1xOAvH4WMaMTAT+HhOSowITw==
   dependencies:
     formik "^2.2.9"
     next "^11.0.1"

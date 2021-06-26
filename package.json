@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@danielmat/api-utils": "^1.0.0",
+    "@danielmat/api-utils": "^1.0.1",
     "formik": "^2.2.9",
     "mongodb": "^3.6.9",
     "next": "10.2.3",
