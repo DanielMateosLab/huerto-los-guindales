@@ -4,8 +4,7 @@ import useFetchGroups from "utils/useFetchGroups"
 import styles from "../styles/Basic.module.css"
 
 export default function Index() {
-  // TODO: Db client doesn't have to be closed manually, so refactor db connection functions to be simpler.
-  // Add error and loading messages. Then add pagination and filter
+  // TODO: Add error and loading messages. Then add pagination and filter
   const { groups, groupsCount } = useFetchGroups()
 
   return (
@@ -21,7 +20,7 @@ export default function Index() {
           </header>
           {groups &&
             groups.map((group: Group) => (
-              <div key={group._id}>{group.name}</div>
+              <div key={group._id.toHexString()}>{group.name}</div>
             ))}
         </section>
       </main>
