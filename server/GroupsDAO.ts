@@ -1,22 +1,17 @@
-import { Collection, Db } from "mongodb"
+import { Db } from "mongodb"
 import { Group } from "utils/types"
+import CollectionDAO from "./CollectionDAO"
 
-export class GroupsDAO {
-  private collection: Collection<Group>
-
+export class GroupsDAO extends CollectionDAO<Group> {
   constructor(db: Db) {
-    this.collection = db.collection<Group>("groups")
+    super(db, "groups")
   }
 
   async getGroups(): Promise<{ groupsCount: number; groups: Group[] }> {
     const cursor = this.collection.find().sort({ name: 1 }).limit(10)
 
     const groupsCount = await cursor.count()
-    const groups = await cursor
-      .toArray()
-      .then((result) =>
-        result.map((group) => ({ ...group, _id: group._id.toString() }))
-      )
+    const groups = await cursor.toArray()
 
     return { groups, groupsCount }
   }

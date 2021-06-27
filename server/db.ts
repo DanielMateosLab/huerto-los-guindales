@@ -1,18 +1,28 @@
 import { MissingEnvVarError } from "@danielmat/api-utils"
-import { MongoClient } from "mongodb"
+import { Db, MongoClient } from "mongodb"
 
-/**
- *  In order to connect to the db we have to:
- *  - 1: get the client and store it in a variable, so we can close the connection after
- *    the operations. Use 'getClient()'.
- *  - 2: connect to the db with 'connectToDb()', passing the created client.
- */
+let client: MongoClient | undefined
+let db: Db | undefined
 
-/**
- * getClient(): it is important to close the returned client connection after
- *  operations are done. Use `client.close()`
- */
-export function getClient(): MongoClient {
+// Connect to db
+export async function connectToDb(): Promise<Db> {
+  if (!client) {
+    client = getClient()
+  }
+
+  if (!client.isConnected()) {
+    await client.connect()
+  }
+
+  if (!db) {
+    const DB_NAME = getDbName()
+    db = client.db(DB_NAME)
+  }
+
+  return db
+}
+
+function getClient(): MongoClient {
   const DB_URI = getDbURI()
 
   const client = new MongoClient(DB_URI, {
@@ -31,15 +41,6 @@ function getDbURI(): string {
   }
 
   return DB_URI
-}
-
-// Connect to db
-export async function connectToDb(client: MongoClient) {
-  const DB_NAME = getDbName()
-
-  await client.connect()
-
-  return client.db(DB_NAME)
 }
 
 function getDbName(): string {
