@@ -20,7 +20,7 @@ export default function Index() {
           </header>
           {groups &&
             groups.map((group: Group) => (
-              <div key={group._id.toHexString()}>{group.name}</div>
+              <div key={group._id}>{group.name}</div>
             ))}
         </section>
       </main>

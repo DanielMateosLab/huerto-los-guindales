@@ -1,8 +1,7 @@
 import { ApiResponse } from "@danielmat/api-utils"
-import { ObjectId } from "mongodb"
 
 export interface Group {
-  _id: ObjectId
+  _id: string
   name: string
 }
 
