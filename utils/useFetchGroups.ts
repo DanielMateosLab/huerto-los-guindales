@@ -24,6 +24,7 @@ const useFetchGroups = () => {
           throw new Error(res.message)
         }
       } catch (e) {
+        console.log(e)
         setError(e.message || "")
       } finally {
         setLoading(false)
